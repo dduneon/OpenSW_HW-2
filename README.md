@@ -365,11 +365,7 @@ kill 명령어의 default 시그널은 TERM(15) 인데, `-s` 옵션을 주면 �
 
 <img width="474" alt="image" src="https://user-images.githubusercontent.com/84072084/171675416-eb9d48ae-7c99-433b-a19c-6cbb8bc43844.png">
 
-- `pid` : 종료시킬 프로세스 ID나 프로세스 이름을 지정한다.
-
-- `-s` : 전달할 시그널의 종류를 지정한다. 여기에는 시그널 이름이나 번호를 써준다.
-
-- `l` : 시그널로 사용할 수 있는 시그널 이름들을 보여준다.
+프로세스는 대부분의 시그널을 무시할 수 있지만, `9(SIGKILL)`과 `19(SIGSTOP)` 시그널은 무시할 수 없다.
 
 <br>
 
