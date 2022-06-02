@@ -9,6 +9,8 @@
 1. 리눅스 명령어 조사하기
    - `top` , `ps` , `jobs` , `kill`
 2. vim 에디터 매크로 사용방법 조사하기
+3. 마무리
+
 
 <br>
 
@@ -449,7 +451,7 @@ let @(매크로KEY) = (CTRL+r CTRL+r (매크로KEY))
 
 <br>
 
-# 마무리
+# 3. 마무리
 
 이번 과제를 통하여 `README` 파일의 Markdown 형식으로 글을 작성해 보았는데, 평소에도 가끔 Git Blog를 작성하여 어렵지 않게 접근할 수 있었던 것 같다.
 
@@ -466,3 +468,5 @@ let @(매크로KEY) = (CTRL+r CTRL+r (매크로KEY))
 [https://www.booleanworld.com/guide-linux-top-command/](https://www.booleanworld.com/guide-linux-top-command/)
 
 [https://terms.naver.com/entry.naver?docId=4125682&cid=59321&categoryId=59321](https://terms.naver.com/entry.naver?docId=4125682&cid=59321&categoryId=59321)
+
+[https://maduinos.blogspot.com/2020/07/vim-lecture-4-vim.html](https://maduinos.blogspot.com/2020/07/vim-lecture-4-vim.html)
