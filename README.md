@@ -369,6 +369,10 @@ kill 명령어의 default 시그널은 TERM(15) 인데, `-s` 옵션을 주면 �
 
 <br>
 
+# 2. vim에디터 매크로 사용방법 조사하기
+
+
+
 # Reference
 
 [https://www.booleanworld.com/guide-linux-top-command/](https://www.booleanworld.com/guide-linux-top-command/)
