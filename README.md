@@ -173,30 +173,48 @@ ps [옵션]
 
 ## 사용 예시
 
-`PID`, `CMD` 등 프로세스의 기본적인 내용만 출력
+`PID`, `CMD` 등 프로세스의 기본적인 내용만 출력 (옵션을 주지 않은경우)
 ```bash
 ps
 ```
+
+<br>
 
 모든 프로세스를 출력
 ```bash
 ps -e
 ```
 
+<img width="300" alt="image" src="https://user-images.githubusercontent.com/84072084/171665507-ddcc4d96-525d-4a85-9897-8f80d99c1c33.png">
+
+<br>
+
 풀 포맷으로 출력 (`uid, pid, ppid, tty` 등)
 ```bash
 ps -f
 ```
+
+<img width="343" alt="image" src="https://user-images.githubusercontent.com/84072084/171665602-8af21821-1066-4546-91e5-72963b230f4d.png">
+
+<br>
 
 긴 포맷으로 출력 (풀 포맷 + `F, S, PRI` 등)
 ```bash
 ps -l
 ```
 
+<img width="422" alt="image" src="https://user-images.githubusercontent.com/84072084/171665763-901afaa3-9df0-4763-b94f-945805e39cdf.png">
+
+<br>
+
 프로세스 번호(`PID`)가 1인 프로세스를 출력
 ```bash
 ps -p 1
 ```
+
+<img width="405" alt="image" src="https://user-images.githubusercontent.com/84072084/171665902-fc9d56b5-d5ad-4087-96c8-2931fabf94cb.png">
+
+<br>
 
 계정이 seek인 프로세스를 출력
 ```bash
@@ -221,6 +239,8 @@ ps -ef | more
 ```bash
 ps -ef | grep seek
 ```
+
+<br>
 
 ## 여러 필드들
 
@@ -249,18 +269,107 @@ ps -ef | grep seek
 | USER | 사용자 이름 | u |
 | WCHAN | 프로세스에 거주하는 커널 함수 | -l, l |
 
-
-옵션을 주지 않고 `ps`만 입력하는 경우에는 위 사진처럼 **PID, TTY, TIME, CMD** 만 출력합니다
-
-
-
 <br>
 
 # ✏️ `jobs`
 
+`jobs` 명령어는 현재 세션의 작업의 상태를 표시하는 명령어이다.
+
+현재 쉘 세션에서 실행시킨 백그라운드 작업의 목록이 출력되며, 각 작업에는 번호가 붙어 있어 `kill` 명령어 뒤에는 '%번호' 등으로 사용할 수 있다.
+
+<br>
+
+```bash
+jobs [option] [num]
+```
+
+`jobs` 명령어는 현재 쉘 프로세스의 자식 백그라운드 프로세스를 보여준다고 생각하면 된다.
+
+<img width="486" alt="image" src="https://user-images.githubusercontent.com/84072084/171668463-f7a8ee5e-9cbb-474e-aa3d-60324255a131.png">
+
+<br>
+
+## 상태값
+
+| 상태 | 설명 |
+|--|--|
+| Running | 작업이 계속 진행중임 |
+| Done | 작업이 완료되어 0을 반환 |
+| Done(code) | 작업이 종료되었으며 0이 아닌 코드를 반환 |
+| Stopped | 작업이 일시 중단 |
+| Stopped(SIGTSTP) | SIGSTP 시그널이 작업을 일시 중단 |
+| Stopped(SIGSTOP) | SIGSTOP 시그널이 작업을 일시 중단 |
+| Stopped(SIGTTIN) | SIGTTIN 시그널이 작업을 일시 중단 |
+| Stopped(SIGTTOU) | SIGTTOU 시그널이 작업을 일시 중단 |
+
+<br>
+
+## 옵션
+
+| 옵션 | 설명 |
+|--|--|
+| -l | 프로세스 그룹 ID를 state 필드 앞에 출력 |
+| -n | 프로세스 그룹 중에 대표 프로세스 ID를 출력 |
+| -p | 각 프로세스 ID에 대해 한 행씩 출력 |
+| command | 지정한 명령어를 실행 |
+
+<br>
+
+<img width="476" alt="image" src="https://user-images.githubusercontent.com/84072084/171671235-129a732a-46b8-4a8b-a968-8c8b2be2fa9b.png">
+
+- `-l` 옵션은 `state` 필드 앞에 프로세스 ID를 출력한다
+
+<br>
+
+<img width="448" alt="image" src="https://user-images.githubusercontent.com/84072084/171671905-718c7713-a199-4938-bd9b-e21508229caa.png">
+
+- `-p` 옵션은 % 뒤에 나오는 문자로 시작하는 모든 프로세스 ID를 확인할 수 있다
+
 <br>
 
 # ✏️ `kill`
+
+프로세스에 특정한 SIGNAL을 보내는 명령어로, 일반적으로 종료되지 않는 프로세스를 종료 시킬 때 많이 사용한다.
+
+```bash
+kill [pid]
+```
+
+일반적으로 위와 같은 방법으로 죽이려는 프로세스의 `pid`를 얻은 다음, kill 명령어의 인자로 넘기면 된다.
+
+<br>
+
+## 사용자 지정 시그널 전송
+
+```
+kill -s [signal] [pid]
+```
+
+kill 명령어의 default 시그널은 TERM(15) 인데, `-s` 옵션을 주면 다른 시그널을 보낼 수 있다.
+
+예를 들어, 프로세스가 TERM(15) 시그널에 응답하지 않으면 다음의 명령어처럼 KILL(9)를 사용하여 강제로 죽일 수 있다.
+
+<img width="447" alt="image" src="https://user-images.githubusercontent.com/84072084/171674940-036a6503-c46a-45c6-b052-2fb483dd8078.png">
+
+`PID` 9를 가지는 bash를 `kill` 하기 위하여 `kill 9` 를 명령하였는데, 아무런 응답이 없었다.
+
+여기에서 `kill -s KILL 9` 를 통하여 `SIGKILL` 시그널을 전송하였더니 bash의 프로세스가 종료됨을 볼 수 있었다.
+
+`kill -9 9` 명령으로도 동일하게 작동시킬 수 있다.
+
+> `SIGKILL = KILL = 9`
+
+<br>
+
+## 시그널의 종류
+
+<img width="474" alt="image" src="https://user-images.githubusercontent.com/84072084/171675416-eb9d48ae-7c99-433b-a19c-6cbb8bc43844.png">
+
+- `pid` : 종료시킬 프로세스 ID나 프로세스 이름을 지정한다.
+
+- `-s` : 전달할 시그널의 종류를 지정한다. 여기에는 시그널 이름이나 번호를 써준다.
+
+- `l` : 시그널로 사용할 수 있는 시그널 이름들을 보여준다.
 
 <br>
 
@@ -268,3 +377,4 @@ ps -ef | grep seek
 
 [https://www.booleanworld.com/guide-linux-top-command/](https://www.booleanworld.com/guide-linux-top-command/)
 
+[https://terms.naver.com/entry.naver?docId=4125682&cid=59321&categoryId=59321](https://terms.naver.com/entry.naver?docId=4125682&cid=59321&categoryId=59321)
